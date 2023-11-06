@@ -10,11 +10,11 @@ The PMOD-Flash module has been successfully tested on a Raspberry Pi 4 running R
 
 ### Function Test
 
-The Raspberry Pi OS comes with the *flashrom* program that can be used to read or write to the flash module.
+The Raspberry Pi OS comes with the *flashrom* program that can be used to read or write to the flash module. Below, the *flashrom* program identifies the flash chip vendor and model.
 
 <img src="images/flashrom1-spi-detect.png" width="600px">
 
-The example program [SPI_Flash_Example](SPI_Flash_Example/) identifies the flash chip vendor and model, and we can dump the entire content from the flash into a local file *rom.img*. The completion time strongly relates to the SPI bus speed setting (given in KHz). In the example below we set 22 MHz for the SPI bus.
+We can dump the entire content from the flash into a local file *rom.img*. The completion time strongly relates to the SPI bus speed setting (given in KHz). In the example below we set 22 MHz for the SPI bus.
 
 <img src="images/flashrom2-img-extract.png" width="600px">
 

@@ -1,5 +1,7 @@
 ## Flash PMOD
 
+![xiao-test](https://github.com/fm4dd/pmod-flash/actions/workflows/xiao.yml/badge.svg)
+
 ### Description
 
 <img src="images/pmod-flash.png" width="240px">
@@ -45,12 +47,14 @@ The following Verilog code examples demonstrate the board function for quick ver
 ### PMOD-Flash Function Tests
 
 PMOD Flash module connected to the PMOD2RPi board, driven by Seeeduino XIAO SAMD21 MCU:
+
 <img src="examples/arduino/images/pmod2rpi-setup.jpg" width="600px">
 
-
 PMOD Flash module connected to the PMOD2RPi board, interfacing with the Raspberry Pi 4:
+
 <img src="examples/rpi/images/pmod2rpi-setup.jpg" width="600px">
 
 
 PMOD Flash module verified running at 50MHz SPI clock speed with the Raspberry Pi 4:
+
 <img src="examples/rpi/images/pmod2rpi-speed.png" width="600px">
