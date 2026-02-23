@@ -43,6 +43,7 @@ The following Verilog code examples demonstrate the board function for quick ver
 |----------|--------------------------------------|--------------------------------------------------------------|
 | Arduino  |[examples/arduino](examples/arduino)  | Flash test adopted from the SparkFun_SPI_SerialFlash library |
 | Raspberry|[examples/rpi](examples/rpi)          | Linux has the flashrom program for basic read/write commands |
+| Gatemate |[examples/gatemate](examples/gatemate)| Gatemate FPGA test program for basic Flash access validation |
 
 ### PMOD-Flash Function Tests
 

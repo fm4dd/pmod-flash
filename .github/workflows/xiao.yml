@@ -2,14 +2,14 @@ name: xiao-test
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, main ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, main ]
   workflow_dispatch:
-    branches: [ master ]
 
 jobs:
   test-matrix:
+    runs-on: ubuntu-latest 
     strategy:
       matrix:
         arduino-platform: ["Seeeduino:samd"]
@@ -17,17 +17,18 @@ jobs:
           - arduino-platform: "Seeeduino:samd"
             fqbn: "Seeeduino:samd:seeed_XIAO_m0"
 
-    runs-on: windows-latest
-
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v4
+
       - name: Setup Arduino CLI
-        uses: arduino/setup-arduino-cli@v1.1.1
+        uses: arduino/setup-arduino-cli@v1.1.2
+
       - name: Install platform
         run: |
           arduino-cli core update-index --additional-urls https://files.seeedstudio.com/arduino/package_seeeduino_boards_index.json
           arduino-cli core install ${{ matrix.arduino-platform }} --additional-urls https://files.seeedstudio.com/arduino/package_seeeduino_boards_index.json
+
       - name: Compile Sketch
         run: |
           arduino-cli compile --fqbn ${{ matrix.fqbn }} ./examples/arduino/SPI_Flash_example
