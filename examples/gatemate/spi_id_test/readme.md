@@ -29,6 +29,10 @@ Pin_in  "RXD" Loc = "IO_NB_B6"; # TXD
 Pin_out "RTS" Loc = "IO_NB_B7"; # CTS
 ```
 
+PMOD Flash module test on Cologne Chip Gatemate FPGA:
+
+<img src="images/pmod-flash-gatemate.jpg" width="600px">
+
 ### Build FPGA Bitstream
 
 ```

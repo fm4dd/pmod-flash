@@ -19,7 +19,7 @@ CELLS_SYNTH = /home/fm/oss-cad-suite/share/yosys/gatemate/cells_sim.v
 
 ## top module, same for each step
 PROJ = spi_id_test
-ADD_SRC = src/emmitter_uart.v
+ADD_SRC = src/emitter_uart.v
 
 ## central, single HW constraints file, requires ../ because its called from subdir
 PIN_DEF = src/gatemate-e1.ccf

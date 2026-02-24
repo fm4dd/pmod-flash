@@ -31,4 +31,4 @@ jobs:
 
       - name: Compile Sketch
         run: |
-          arduino-cli compile --fqbn ${{ matrix.fqbn }} ./examples/arduino/SPI_Flash_example
+          arduino-cli compile --fqbn ${{ matrix.fqbn }} ./examples/arduino/SPI_Flash_Example

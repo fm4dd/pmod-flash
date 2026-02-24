@@ -13,7 +13,7 @@ https://www.mxic.com.tw/en-us/products/NOR-Flash/Pages/Ultra-Low-Power-Flash.asp
 http://fpga.fm4dd.com/
 
 ### Schematic
-[![PMOD Flash Schematics](images/schema.png)](images/schema.png)
+[![PMOD Flash Schematics](images/schema.svg)](images/schema.svg)
 
 ### PCB Gerber
 <img src="images/pmod-flash-pcb.png" width="240px">
@@ -37,13 +37,14 @@ The PMOD Flash module was designed with KiCad 7
 
 ### Example Code
 
-The following Verilog code examples demonstrate the board function for quick verification.
+The following code examples demonstrate the PMOD function for quick verification on various Microcontroller and FPGA platforms.
 
-| Platform | Test Program location                | Description                                                  |
-|----------|--------------------------------------|--------------------------------------------------------------|
-| Arduino  |[examples/arduino](examples/arduino)  | Flash test adopted from the SparkFun_SPI_SerialFlash library |
-| Raspberry|[examples/rpi](examples/rpi)          | Linux has the flashrom program for basic read/write commands |
-| Gatemate |[examples/gatemate](examples/gatemate)| Gatemate FPGA test program for basic Flash access validation |
+| Platform   | Test Program location                    | Description                                                    |
+|------------|------------------------------------------|----------------------------------------------------------------|
+| Arduino    |[examples/arduino](examples/arduino)      | Flash test adopted from the SparkFun_SPI_SerialFlash library   |
+| Raspberry  |[examples/rpi](examples/rpi)              | Linux has the flashrom program for basic read/write commands   |
+| Gatemate   |[examples/gatemate](examples/gatemate)    | Gatemate FPGA test program for basic Flash access validation   |
+| iCEBreaker |[examples/icebreaker](examples/icebreaker)| iCEBreaker FPGA test program for basic Flash access validation |
 
 ### PMOD-Flash Function Tests
 
@@ -55,7 +56,11 @@ PMOD Flash module connected to the PMOD2RPi board, interfacing with the Raspberr
 
 <img src="examples/rpi/images/pmod2rpi-setup.jpg" width="600px">
 
-
 PMOD Flash module verified running at 50MHz SPI clock speed with the Raspberry Pi 4:
 
 <img src="examples/rpi/images/pmod2rpi-speed.png" width="600px">
+
+PMOD Flash module test on Cologne Chip Gatemate FPGA:
+
+<img src="examples/gatemate/spi_id_test/images/pmod-flash-gatemate.jpg" width="600px">
+
