@@ -1,19 +1,28 @@
-## PMOD-FLASH test program
+## OnBoard Flash test program
 
 ### Description
 
 This is a Verilog test program for the flash chip on PMOD Flash.
 It only sends one command 9Fh (Read Identification - RDID), and returns the output to a serial console.
 
-For my test, I connected PMOD Flash to PMOD1B on the iCEBreaker FPGA board.
-On PMOD2 I connected the Digilent pmod 8LD to get the 8-LED diagnostics output.
+This code also works with the onboard Flash of the iCEBreaker board.
 
-The SPI clock is a simple 4:1 divider, creating a SPI flash clock frequency of 3 MHz (12Mhz/4).
+However by default, the onboard flash enters a Deep Power Down (DPD) mode after the bistream has been loaded.
+When the Flash is in DPD, it ignores all standard commands—including RDID (0x9F).
+Since it ignores the command, it never drives the MISO line, leaving it pulled high (reading as FF).
 
-This code also works with the onboard Flash of the iCEBreaker board, see [readme-onboard-flash.md](readme-onboard-flash.md).
+This means we either must wake the flash up from Deep Power Down (option A),
+or (B) have the programming tell the board to disable Deep Power Down after loading the bitstream.
+
+Option A is to add the DPD wake-up logic into the Verilog code before sending the RDID command.
+
+For (B), we can tell bitstream generator program `icepack` to disable DPD mode.
+This is done with the option `icepack -s`: disable final deep-sleep SPI flash command after bitstream is loaded
+
+By adding `-s` into the Makefile, and we can query the onboard flash without additional coding.
 In the Makefile, we can simply switch between onboard flash and pmod-flash by enabling the right constraints file.
 
-iCEBreaker constraints:
+iCEBreaker constraints for the onboard FLash:
 ```
 ## ##################################################
 ## iCEBreaker board constraints
@@ -24,13 +33,12 @@ set_io -nowarn TXD         9
 set_io -nowarn RESET      10
 
 ## ##################################################
-## PMOD1B constraints for github.com/fm4dd/pmod-flash
-# MX25R6435F is a 64Mbit (8MByte) Serial NOR Flash
+## iCEbreaker onboard SPI Flash
 ## ##################################################
-set_io -nowarn SPIFLASH_CS_N 43
-set_io -nowarn SPIFLASH_MOSI 38
-set_io -nowarn SPIFLASH_MISO 34
-set_io -nowarn SPIFLASH_CLK  31
+set_io -nowarn SPIFLASH_CLK  15
+set_io -nowarn SPIFLASH_CS_N 16
+set_io -nowarn SPIFLASH_MOSI 14
+set_io -nowarn SPIFLASH_MISO 17
 
 ## ##################################################
 ## PMOD2 connector constraints for Digilent PMOD 8LD
@@ -140,19 +148,19 @@ exit is        : no
 
 Type [C-a] [C-h] to see available commands
 Terminal ready
-Chip ID: C2 28 17 
-Chip ID: C2 28 17 
-Chip ID: C2 28 17 
+Chip ID: EF 40 18 
+Chip ID: EF 40 18 
+Chip ID: EF 40 18 
 
 Terminating...
 Thanks for using picocom
 ```
 Exit picocom with CTL-A followed by CTL-X.
 
-Notice the device identification ID is "C2 28 17" = Macronix MX25R6435F.
+Notice the device identification ID is "EF 40 18" = Winbond W25Q128.
 
-* Manufacturer C2 = Macronix
-* memory type: 28 = 3V (3.3V) Serial NOR Flash
-* mem density: 17 = 64Mbit (8 Megabytes. Capacity 0x17 = 23 decimal, 2^23 bits = 8MB)
+* Manufacturer EF = Winbond
+* memory type: 40 = W25Q series
+* mem density: 18 = 128Mbit (16 Megabytes. Capacity 0x18 = 24 decimal, 2^24 bits = 16MB) 
 
 If the module constraints are wrong and the SPI communication fails, the typical serial output becomes "FF FF FF".

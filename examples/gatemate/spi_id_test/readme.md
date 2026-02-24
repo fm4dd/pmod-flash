@@ -8,6 +8,8 @@ It only sends one command 9Fh (Read Identification - RDID), and returns the outp
 For my test, I connected PMOD Flash to PMODA on the Gatemate E1 FPGA board.
 On PMOD2 I have the Digilent pmod USBUART connected to the lower pinrow.
 
+The SPI clock is a simple 4:1 divider, creating a SPI flash clock frequency of 2.5 MHz (10Mhz/4).
+
 Gatemate constraints:
 ```
 ## #######################################################
